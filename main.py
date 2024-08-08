@@ -33,10 +33,11 @@ while True:
         print("Number deleted successfully!")
     elif choice == 3:
         name = input("Enter name to be searched:")
-        cursor.execute("SELECT Name, Number FROM CONTACTS WHERE Name =?", (name,))
+        cursor.execute("SELECT Name, Number, Relation FROM CONTACTS WHERE Name =?", (name,))
         result = cursor.fetchall()
+        print(result)
         for rec in result:
-            print("Name:",rec[0], "Number:",rec[1])
+            print("Name:",rec[0],"-->", "Number:",rec[1],"-->" ,"Relation:", rec[2])
 
     elif choice == 4:
         print("Exiting...")
