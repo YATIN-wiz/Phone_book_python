@@ -20,4 +20,10 @@ while True:
         cursor.execute("CREATE TABLE CONTACTS (Name text, Number integer)")
         print("Table created successfully!")
     elif choice == "2":
-        
+        name = input("Enter the name: ")
+        number = int(input("Enter the number: "))
+        cursor.execute("INSERT INTO CONTACTS VALUES (?,?)", (name, number))
+        conn.commit()
+        print("Number added successfully!")
+   
+
