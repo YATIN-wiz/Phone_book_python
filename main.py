@@ -4,7 +4,7 @@ conn = sqlite3.connect("Contacts.db")
 
 cursor = conn.cursor()
 
-# Create table if not ex
+# Create table if not exists
 cursor.execute("CREATE TABLE IF NOT EXISTS CONTACTS (Name text, Number string)")
 
 def menu():
@@ -33,7 +33,10 @@ while True:
     elif choice == 3:
         name = input("Enter name to be searched:")
         cursor.execute("SELECT Name, Number FROM CONTACTS WHERE Name =?", (name,))
-        print(cursor.fetchall())
+        result = cursor.fetchall()
+        for rec in result:
+            print("Name:",rec[0], "Number:",rec[1])
+
     elif choice == 4:
         print("Exiting...")
         break
