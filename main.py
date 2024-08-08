@@ -11,19 +11,25 @@ def menu():
     print("3. DELETE A NUMBER")
     print("4. SEARCH FOR A NUMBER")
 
-    choice = input("Enter your choice (1-4): ")
+    choice = int(input("Enter your choice (1-4): "))
     return choice
 
 while True:
     choice = menu()
-    if choice == "1":
-        cursor.execute("CREATE TABLE CONTACTS (Name text, Number integer)")
+    if choice == 1:
+        cursor.execute("CREATE TABLE CONTACTS (Name text, Number string)")
         print("Table created successfully!")
-    elif choice == "2":
+    elif choice == 2:
         name = input("Enter the name: ")
         number = int(input("Enter the number: "))
         cursor.execute("INSERT INTO CONTACTS VALUES (?,?)", (name, number))
         conn.commit()
         print("Number added successfully!")
+    elif choice == 3:
+        name = input("Enter the name to delete: ")
+        cursor.execute("DELETE FROM CONTACTS WHERE Name =?", (name,))
+        conn.commit()
+        print("Number deleted successfully!")
+    
    
 
