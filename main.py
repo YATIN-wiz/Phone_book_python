@@ -5,7 +5,7 @@ conn = sqlite3.connect("Contacts.db")
 cursor = conn.cursor()
 
 # Create table if not exists
-cursor.execute("CREATE TABLE IF NOT EXISTS CONTACTS (Name text, Number string)")
+cursor.execute("CREATE TABLE IF NOT EXISTS CONTACTS (Name text, Number string, Relation text)")
 
 def menu():
     print("----MENU----")
@@ -22,7 +22,8 @@ while True:
     if choice == 1:
         name = input("Enter the name: ")
         number = int(input("Enter the number: "))
-        cursor.execute("INSERT INTO CONTACTS VALUES (?,?)", (name, number))
+        relation = input("Enter relation:")
+        cursor.execute("INSERT INTO CONTACTS VALUES (?,?,?)", (name, number, relation))
         conn.commit()
         print("Number added successfully!")
     elif choice == 2:
