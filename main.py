@@ -12,7 +12,9 @@ def menu():
     print("1. ADD A NEW NUMBER")
     print("2. DELETE A NUMBER")
     print("3. SEARCH FOR A NUMBER")
-    print("4. EXIT")
+    print("4. VIEW ALL THE CONTACTS")
+    print("5. TO VIEW THE CONTACTS OF A PARTICULAR RELATION ")
+    print("6. EXIT")
 
     choice = int(input("Enter your choice (1-4): "))
     return choice
@@ -38,8 +40,15 @@ while True:
         print(result)
         for rec in result:
             print("Name:",rec[0],"-->", "Number:",rec[1],"-->" ,"Relation:", rec[2])
-
     elif choice == 4:
+        cursor.execute("SELECT * FROM CONTACTS")
+        result = cursor.fetchall()
+        for rec in result:
+            print("Name:",rec[0],"-->","Number:",rec[1],"-->","Relation:",rec[2])
+  
+    
+
+    elif choice == 5:
         print("Exiting...")
         break
 
