@@ -16,7 +16,7 @@ def menu():
     print("5. TO VIEW THE CONTACTS OF A PARTICULAR RELATION ")
     print("6. EXIT")
 
-    choice = int(input("Enter your choice (1-4): "))
+    choice = int(input("Enter your choice (1-6): "))
     return choice
 
 while True:
@@ -28,27 +28,39 @@ while True:
         cursor.execute("INSERT INTO CONTACTS VALUES (?,?,?)", (name, number, relation))
         conn.commit()
         print("Number added successfully!")
+
     elif choice == 2:
         name = input("Enter the name to delete: ")
-        cursor.execute("DELETE FROM CONTACTS WHERE Name =?", (name,))
+        result = cursor.execute("DELETE FROM CONTACTS WHERE Name =?", (name,))
         conn.commit()
-        print("Number deleted successfully!")
+        print(result.rowcount)
+        if result.rowcount == 0:
+            print("Name not found!")
+        else:
+            print("Number deleted successfully!")
+
     elif choice == 3:
         name = input("Enter name to be searched:")
         cursor.execute("SELECT Name, Number, Relation FROM CONTACTS WHERE Name =?", (name,))
         result = cursor.fetchall()
-        print(result)
         for rec in result:
             print("Name:",rec[0],"-->", "Number:",rec[1],"-->" ,"Relation:", rec[2])
+
     elif choice == 4:
         cursor.execute("SELECT * FROM CONTACTS")
         result = cursor.fetchall()
         for rec in result:
             print("Name:",rec[0],"-->","Number:",rec[1],"-->","Relation:",rec[2])
-  
-    
 
     elif choice == 5:
+        relation = input("Enter relation to be searched:")
+        cursor.execute("SELECT Name, Number, Relation FROM CONTACTS WHERE Relation =?", (relation,))
+        result = cursor.fetchall()
+        for rec in result:
+            print("Name:",rec[0],"-->","Number:",rec[1],"-->","Relation:",rec[2])
+    
+
+    elif choice == 6:
         print("Exiting...")
         break
 
